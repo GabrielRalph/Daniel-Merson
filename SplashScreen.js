@@ -23,7 +23,10 @@ class SplashScreen extends SvgPlus{
 		this._icon_pos = new Vector(50, 50);
 		this._icon_offset = new Vector(0, 0);
 		this._icon_transform = new Vector(-50, -50);
-		this.iconSize = `3.8em`
+		this.styles = {
+			'font-size': '2em'
+		}
+		this.iconSize = `2.55em`
 
 		this.opacity = 1;
 		this.class = "splash-screen";

@@ -21,6 +21,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
   </head>
+
   <body>
   </body>
 
@@ -30,10 +31,22 @@
     let cms = new Cms();
     cms.edit = false;
     document.body.appendChild(cms)
-
   </script>
 
   <style>
+    body{
+      font-size: min(3vw, 20px);
+      --yellow: #FFED00;
+      --font: 'Druk Wide';
+      background: black;
+      color: var(--yellow);
+      font-family: var(--font);
+      margin: 5px 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+  /* Display */
 
     .display {
       position: relative;
@@ -47,14 +60,15 @@
       transform: translate(0, -50%);
       max-height: 100vh;
       max-width: 100vw;
-
     }
+
     iframe{
       width: calc(100% - 30px);
       position: fixed;
       top: 50%;
       transform: translate(0, -50%);
     }
+
     #showreal{
       position: fixed;
       top: 50%;
@@ -62,115 +76,39 @@
       right: 0;
       bottom: 0;
       z-index: -1;
-      min-height: 100vw;
+      max-height: 100vmax;
+      min-height: 100vh;
       min-width: 100vw;
       transform: translate(-50%, -50%);
     }
 
-    body{
-      font-size: min(3vw, 20px);
-      --yellow: #FFED00;
-      --font: 'Druk Wide';
-      background: black;
-      color: var(--yellow);
-      font-family: var(--font);
-      margin: 5px 15px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    input{
-      padding: 10px;
-      font-family: var(--font);
-      color: var(--yellow);
-      background: transparent;
-      border: 3px solid var(--yellow);
-      border-radius: 50px;
-      outline: none;
-      font-size: 16px;
-    }
-
-    .form-panel h3{
-      margin: 20px 30px 5px 20px;
-
-    }
-    .form-panel input{
-      width: 40vw;
-    }
-
-    .form-panel h1{
-      margin: 0;
-    }
-
-    .form-panel{
-      padding: 50px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-    }
-    .form-panel > div{
-      margin: auto;
-      display: inline-block;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-
-    .v-list.works{
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .v-list.links{
-      position: absolute;
-      top: 0;
-      right: 0;
-      text-align: right;
-    }
-    .v-list.links a{
-      color: var(--yellow);
-      text-decoration: none;
-    }
-
-    .link.edit a{
-      line-height: 30px;
-      height: 30px;
-      display: inline-block;
-      vertical-align: top;
-    }
-
-    .v-list h1{
-      margin: 0;
-    }
-
+  /* v-list */
 
     .v-list{
       pointer-events: none;
       display: inline-block;
     }
+
     .v-list .header h1{
       cursor: pointer;
       pointer-events: all;
       display: inline-block;
-      font-size: 2em;
+      margin: 0;
     }
-    /* .works .header h1{
-      display: list-item;
 
-    } */
-
-
-    .work, .link{
-      cursor: pointer;
+    .v-list > div{
       font-size: 1.3em;
       pointer-events: all;
     }
+
+  /* works */
+
+    .works{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     .work.edit{
       margin: 10px 0;
     }
@@ -180,27 +118,28 @@
       margin-right: 10px;
     }
 
-    svg{
-      fill: var(--yellow);
-
-    }
-    .trash{
-      height: 20px;
-      margin: 5px;
-      fill: var(--yellow);
-    }
-
     .work span{
       display: inline-block;
       vertical-align: top;
+      cursor: pointer;
     }
 
-    .work.edit span{
-      line-height: 30px;
-      height: 30px;
+  /* links */
+
+    .links{
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
     }
-    .arrow{
-      margin: 0 2px;
+
+    .links a{
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    svg {
+      fill: var(--yellow);
     }
 
   </style>
