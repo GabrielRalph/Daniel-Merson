@@ -5,65 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="../Assets/font/stylesheet.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
-
   </head>
   <body>
   </body>
 
   <script type = "module">
-    import {User} from "../DataSync.js"
-    import {SvgPlus} from "../SvgPlus.js"
-    import {Cms} from "./Cms.js"
-
-    let user = new User("/CMS");
+    import {Cms} from "./CMS/Cms.js"
 
     let cms = new Cms();
+    cms.edit = false;
     document.body.appendChild(cms)
-
-    user.addEventListener('user', (e) => {
-      cms.edit = user.admin
-    })
-
-    window.oncontextmenu = (e) => {
-      e.preventDefault()
-      let logout = new SvgPlus("DIV")
-      let over = true;
-      logout.onmouseover = () => {over = true}
-      logout.onmouseleave = () => {over = false}
-
-      logout.innerHTML = "Logout"
-      logout.styles = {
-        position: 'fixed',
-        top: (e.y-10)+'px',
-        left: (e.x-10)+'px',
-        cursor: 'pointer'
-      }
-      logout.onclick = () => {
-        user.signOut()
-      }
-
-      let next = () => {
-        setTimeout(async () => {
-          console.log(over);
-          if (!over) {
-            await logout.waveTransistion((t) => {
-              logout.styles = {opacity: t}
-            }, 500, false)
-            logout.remove()
-          }else{
-            next()
-          }
-        }, 1000)
-
-      }
-
-      document.body.appendChild(logout)
-      next();
-    }
 
   </script>
 
@@ -155,10 +107,6 @@
     }
 
 
-    /* input:focus {
-      border: 5px solid var(--yellow);
-    } */
-
     .v-list.works{
       position: absolute;
       top: 0;
@@ -228,50 +176,6 @@
     .arrow{
       margin: 0 2px;
     }
-
-    #loader,   #firebaseui-auth-container{
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      z-index: 100000;
-      background: rgba(255, 240, 255, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    ul.firebaseui-idp-list{
-      padding: 0;
-    }
-    li.firebaseui-list-item{
-      display: block;
-    }
-    button.firebaseui-idp-button{
-      padding: 0;
-      border: none;
-      margin: auto;
-      display: block;
-      outline: none;
-      border-radius: 2em;
-
-    }
-    img.firebaseui-idp-icon{
-      height: 4em;
-      float: left;
-    }
-    span.firebaseui-idp-text-long{
-      line-height: 4em;
-      padding: 0 1em;
-    }
-    span.firebaseui-idp-text-short{
-      display:none
-    }
-
-    .firebaseui-container{
-      background: transparent;
-    }
-
-
 
   </style>
 </html>

@@ -88,7 +88,9 @@ class Link extends SvgPlus{
   set edit(edit){
     if (!!edit){
       this.class = "link edit"
-      this.appendChild(this._trash)
+      if (!this.contains(this._trash)){
+        this.appendChild(this._trash)
+      }
     }else{
       this.class = "link"
       this._trash.remove()
@@ -124,6 +126,7 @@ class Info extends VList{
 
   initItem(el){
     el.info = this;
+    el.edit = this.edit;
   }
 
   updateInfo(){
@@ -131,6 +134,7 @@ class Info extends VList{
   }
 
   set edit(edit){
+    this._edit = !!edit;
     if (!!edit){
       this.appendChildToHead(this.add)
     }else{
@@ -141,6 +145,9 @@ class Info extends VList{
         link.edit = edit;
       }
     }
+  }
+  get edit(){
+    return this._edit;
   }
 
   get links(){

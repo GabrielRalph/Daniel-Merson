@@ -164,7 +164,7 @@ class Work extends SvgPlus{
     }
 
     this.work = data;
-    this.edit = true;
+    this.edit = false;
   }
   reorder(){
     if (this.works instanceof Works){
@@ -206,7 +206,7 @@ class Work extends SvgPlus{
 
     let works = this.works;
     if (SvgPlus.is(works, Works)) {
-      works.works.updateWorks();
+      this.works.updateWorks();
     }
   }
   get order(){
@@ -287,6 +287,7 @@ class Works extends VList{
   initItem(el){
     el.works = this;
     el.orderEnd = this.orderEnd;
+    el.edit = this.edit;
   }
 
   ontitledblclick(){
@@ -327,6 +328,7 @@ class Works extends VList{
   }
 
   set edit(edit){
+    this._edit = !!edit;
     if (!!edit){
       this.appendChildToHead(this.add)
     }else{
@@ -337,6 +339,9 @@ class Works extends VList{
         work.edit = edit;
       }
     }
+  }
+  get edit(){
+    return this._edit;
   }
 }
 
