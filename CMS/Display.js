@@ -19,11 +19,12 @@ class Display extends SvgPlus{
       bottom: 0,
       'font-size': '3em'
     }
-    this._namebox = this.createChild("DIV", {
+    this._namebox = this.createChild("H1", {
       style: {
         position: 'absolute',
         left: 0,
         bottom: 0,
+        margin: 0
       }
     })
     this._editIcon.onclick = () => {
