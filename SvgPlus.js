@@ -63,7 +63,7 @@ class PlusError{
     return this._parse_stack()
   }
 }
-
+let VectorPrecision = 10;
 // 2D vector class
 class Vector{
 	constructor(x = 0, y = null){
@@ -172,7 +172,6 @@ class Vector{
 			this.y = 0;
 			console.error(`error creating vector\n\n${e}\n\nResult: V(${this})`);
 		}
-		this.precision = 10;
 	}
 
 	forMate(val){
@@ -230,8 +229,8 @@ class Vector{
 
 	}
 
-	round(x = 1){
-		return new Vector(Math.round(this.x*Math.pow(10, x))/Math.pow(10, x), Math.round(this.y*Math.pow(10, x))/Math.pow(10, x))
+	round(dp = 1){
+		return new Vector(Vector.round(this.x, dp), Vector.round(this.y, dp))
 	}
 
 	add(p1 = 0, p2 = null){
@@ -404,10 +403,39 @@ class Vector{
 		return (this.x == 0 && this.y == 0)
 	}
 	toString(){
-		return `${this.x.toPrecision(this.precision)},${this.y.toPrecision(this.precision)}`
+    let r = this.round(this.precision);
+		return `${r.x},${r.y}`
 	}
-}
 
+  set x(x){
+    if (typeof x === "number") {
+      this._x = Vector.round(x, this.precision)
+    }
+  }
+  get x(){
+    return this._x;
+  }
+
+  set y(y){
+    if (typeof y === "number") {
+      this._y = Vector.round(y, this.precision)
+    }
+  }
+  get y(){
+    return this._y;
+  }
+
+  get precision(){
+    return VectorPrecision;
+  }
+
+  static round(num, dp = 0){
+    return Math.round(num*Math.pow(10, dp))/Math.pow(10, dp)
+  }
+  static set precision(precision){
+    VectorPrecision = precision
+  }
+}
 
 class SvgPlus{
   constructor(el){

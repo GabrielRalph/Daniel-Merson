@@ -11,9 +11,13 @@ class Cms extends SvgPlus{
   constructor(){
     super("DIV")
 
+    this.id = "page"
+
     this.display = this.createChild(Display)
     this.works = this.createChild(Works)
     this.info = this.createChild(Info)
+
+
 
     this.works.onselect = (work) => {
       this.display.work = work
@@ -42,6 +46,17 @@ class Cms extends SvgPlus{
     this.display.edit = val;
     this.works.edit = val;
     this.info.edit = val;
+  }
+
+  async waitLoad(){
+    return new Promise((resolve, reject) => {
+      this.display.onplaying = () => {
+        resolve(true)
+      }
+      setTimeout(() => {
+        resolve(true)
+      }, 4000)
+    });
   }
 }
 

@@ -74,11 +74,24 @@ class Display extends SvgPlus{
     </video>`
 
     this.playShowreal();
-  }
+    if (this.svideo){
+      this.svideo.onplaying = () => {
+        if (this.onplaying instanceof Function) {
+          this.onplaying();
+        }
+      }
+    }
 
+  }
+  get svideo(){
+    return this._svideo;
+  }
   playShowreal(){
     let vid = this._sreal.getElementsByTagName("video")[0]
-    if (vid) vid.play();
+    if (vid) {
+      this._svideo = vid;
+      vid.play();
+    }
   }
 
   back(){

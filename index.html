@@ -3,6 +3,20 @@
     <meta charset="UTF-8">
     <title>Dan Merson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type = "module">
+      import {SplashScreen} from "./SplashScreen.js"
+
+      let splash = new SplashScreen();
+      document.body.appendChild(splash);
+
+      window.onload = async () => {
+        let page = document.getElementById("page");
+        await page.waitLoad()
+        let element = document.getElementById("logo");
+        element.innerHTML = ""
+        splash.moveToElement(element);
+      }
+    </script>
     <link href="../Assets/font/stylesheet.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
@@ -144,7 +158,12 @@
       cursor: pointer;
       pointer-events: all;
       display: inline-block;
+      font-size: 2em;
     }
+    /* .works .header h1{
+      display: list-item;
+
+    } */
 
 
     .work, .link{

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dan Merson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type = "module">
+      import {SplashScreen} from "./SplashScreen.js"
+
+      let splash = new SplashScreen();
+      document.body.appendChild(splash);
+
+      console.log(document.getElementById("logo"));
+      window.onload = () => {
+        console.log("load");
+        let element = document.getElementById("logo");
+        element.innerHTML = ""
+        splash.moveToElement(element);
+      }
+    </script>
+    <link href="../Assets/font/stylesheet.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1 id = "logo"></h1>
+  </body>
+
+</html>

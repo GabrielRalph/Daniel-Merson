@@ -22,8 +22,10 @@
     let admin;
     user.addEventListener('user', () => {
       // document.body.innerHTML = "";
+
       if (user.admin){
         admin = new Admin();
+
         document.body.appendChild(admin)
       }else{
         admin.remove()

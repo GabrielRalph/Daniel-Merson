@@ -264,11 +264,14 @@ class Works extends VList{
       this.works = e;
     })
 
+    this._headerTitle.id = "logo"
+
     this.add = new SvgPlus("H1");
     this.add.innerHTML = "+"
     this.add.styles = {
       'margin-left': '20px',
-      cursor: "pointer"
+      cursor: "pointer",
+      float: 'right'
     }
     this.add.onclick = () => {
       let form = this.createChild(FormPanel)

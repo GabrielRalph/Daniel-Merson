@@ -508,4 +508,4 @@ class LoaderIcon extends SvgPlus{
   }
 }
 
-export {EditIcon, TickIcon, RadioIcon, TrashIcon, UploadToCloudIcon, LoaderIcon, UploadFilesIcon, LockIcon, AdminIcon, ContentAdminIcon, Arrow}
+export {Icon, EditIcon, TickIcon, RadioIcon, TrashIcon, UploadToCloudIcon, LoaderIcon, UploadFilesIcon, LockIcon, AdminIcon, ContentAdminIcon, Arrow}
