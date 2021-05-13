@@ -36,7 +36,7 @@
 
     }
     iframe{
-      width: 100%;
+      width: calc(100% - 30px);
       position: fixed;
       top: 50%;
       transform: translate(0, -50%);
@@ -54,6 +54,7 @@
     }
 
     body{
+      font-size: min(3vw, 20px);
       --yellow: #FFED00;
       --font: 'Druk Wide';
       background: black;
@@ -134,18 +135,22 @@
       margin: 0;
     }
 
-    .v-list .list{
-      margin-left: 20px;
+
+    .v-list{
+      pointer-events: none;
+      display: inline-block;
     }
     .v-list .header h1{
       cursor: pointer;
-
+      pointer-events: all;
       display: inline-block;
     }
 
 
-    .work{
+    .work, .link{
       cursor: pointer;
+      font-size: 1.3em;
+      pointer-events: all;
     }
     .work.edit{
       margin: 10px 0;

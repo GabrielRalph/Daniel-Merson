@@ -34,6 +34,9 @@ class Display extends SvgPlus{
     dataSync.on("showreal", (e) => {
       this.showreal = e;
     })
+    document.body.onclick = () => {
+      this.playShowreal()
+    }
     this._works.class = "display"
   }
 
@@ -69,13 +72,19 @@ class Display extends SvgPlus{
     <video id = "showreal" autoplay loop muted playsinline>
       <source id = "showreal-src" src= "${src}" type="video/mp4">
     </video>`
+
+    this.playShowreal();
+  }
+
+  playShowreal(){
+    let vid = this._sreal.getElementsByTagName("video")[0]
+    if (vid) vid.play();
   }
 
   back(){
     this.appendChild(this._sreal)
     this._works.remove();
-    let vid = this._sreal.getElementsByTagName("video")[0]
-    vid.play()
+    this.playShowreal();
     this._namebox.innerHTML = ""
   }
   set work(work){
