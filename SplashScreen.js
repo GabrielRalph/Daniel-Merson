@@ -26,6 +26,12 @@ class SplashScreen extends SvgPlus{
 			left: '50%',
 			bottom: '30px',
 			transform: 'translate(-50%, 0)',
+			'pointer-events': 'all'
+		}
+		this._phi.onclick = () => {
+			let link = new SvgPlus("A");
+			link.href = "https://www.galetora.com"
+			link.click()
 		}
 		this.appendChild(this._phi)
 
