@@ -31,6 +31,12 @@
     let cms = new Cms();
     cms.edit = false;
     document.body.appendChild(cms)
+    window.onkeydown = (e) => {
+      let earl = document.querySelector("#page > div.v-list.works > div.list > div:nth-child(1) > span");
+      if (e.key == "a") cms.info.open = true;
+      if (e.key == "s") cms.toggleWorks();
+      if (e.key == "d") earl.click();
+    }
   </script>
 
   <style>
@@ -44,6 +50,7 @@
       margin: 5px 15px;
       position: relative;
       overflow: hidden;
+      user-select: none;
     }
 
   /* Display */

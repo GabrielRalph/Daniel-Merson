@@ -1,5 +1,5 @@
 import {SvgPlus, Vector} from "./SvgPlus.js"
-import {Icon} from "./Icons.js"
+import {Icon, Phi} from "./Icons.js"
 
 Vector.precision = 3;
 
@@ -20,6 +20,15 @@ class SplashScreen extends SvgPlus{
   constructor(){
     super('DIV');
 		this._icon = new Icon(logo);
+		this._phi = new Phi()
+		this._phi.styles = {
+			position: 'fixed',
+			left: '50%',
+			bottom: '30px',
+			transform: 'translate(-50%, 0)',
+		}
+		this.appendChild(this._phi)
+
 		this._icon_pos = new Vector(50, 50);
 		this._icon_offset = new Vector(0, 0);
 		this._icon_transform = new Vector(-50, -50);
@@ -104,7 +113,12 @@ class SplashScreen extends SvgPlus{
 		this.styles = {
 			background: `rgba(0, 0, 0, ${x})`
 		}
+		this._phi.styles = {
+			opacity: x
+		}
 	}
+
+
 
 	set showIcon(val){
 		if (val) {

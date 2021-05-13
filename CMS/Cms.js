@@ -25,20 +25,24 @@ class Cms extends SvgPlus{
     }
 
     this.works.ontitleclick = (e) => {
-      if (this.works.open){
-        this.works.open = false
-      }else{
-        if (!this.display.isShowreal) {
-          this.display.back();
-        }else{
-          this.works.open = true;
-        }
-        this.info.open = false;
-      }
+      this.toggleWorks()
     }
 
     this.info.onstatechange = (e) => {
       if (e) this.works.open = false;
+    }
+  }
+
+  toggleWorks(){
+    if (this.works.open){
+      this.works.open = false
+    }else{
+      if (!this.display.isShowreal) {
+        this.display.back();
+      }else{
+        this.works.open = true;
+      }
+      this.info.open = false;
     }
   }
 
