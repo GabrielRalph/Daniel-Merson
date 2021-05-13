@@ -149,6 +149,10 @@ class DataSync{
     });
   }
 
+  remove(ref){
+    this.ref(ref).remove()
+  }
+
   on(ref, callback, listmode = 'value'){
     if (callback instanceof Function){
       try{

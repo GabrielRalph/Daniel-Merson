@@ -390,7 +390,7 @@ class LockIcon extends Icon{
       this.lockPoint.p = this.startP.add(new Vector(0, val))
       this.lockPoint.c1 = this.startC1.add(new Vector(0, val))
       this.lockPoint.c2 = this.startC2.add(new Vector(0, val))
-      this.lockPath.d._update();
+      this.lockPath.d.update();
     }
   }
 }

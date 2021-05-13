@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dan Merson Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../Assets/font/stylesheet.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+
+  </head>
+  <body>
+  </body>
+
+  <script type = "module">
+    import {User} from "../DataSync.js"
+    import {Admin} from "./Admin.js"
+    import {SvgPlus} from "../SvgPlus.js"
+
+    let user = new User("/Admin");
+    let admin;
+    user.addEventListener('user', () => {
+      // document.body.innerHTML = "";
+      if (user.admin){
+        admin = new Admin();
+        document.body.appendChild(admin)
+      }else{
+        admin.remove()
+        admin = null;
+      }
+    })
+
+    window.oncontextmenu = (e) => {
+      e.preventDefault()
+      let logout = new SvgPlus("DIV")
+      let over = true;
+      logout.onmouseover = () => {over = true}
+      logout.onmouseleave = () => {over = false}
+
+      logout.innerHTML = "Logout"
+      logout.styles = {
+        position: 'fixed',
+        top: (e.y-10)+'px',
+        left: (e.x-10)+'px',
+        cursor: 'pointer',
+        'font-size': '2vw'
+      }
+      logout.onclick = () => {
+        user.signOut()
+      }
+
+      let next = () => {
+        setTimeout(async () => {
+          console.log(over);
+          if (!over) {
+            await logout.waveTransistion((t) => {
+              logout.styles = {opacity: t}
+            }, 500, false)
+            logout.remove()
+          }else{
+            next()
+          }
+        }, 1000)
+
+      }
+
+      document.body.appendChild(logout)
+      next();
+    }
+
+  </script>
+
+  <style>
+  table.admin-users tr td:nth-of-type(2){
+    width: 30%;
+  }
+
+  table.admin-users tr:first-of-type{
+    font-weight: 600;
+  }
+
+  div.admin h1{
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-bottom: var(--margin);
+  }
+
+  table.admin-users:hover > td{
+    background: grey;
+  }
+
+  table.admin-users{
+    width: 100%;
+    font-size: 0.6em;
+    border-spacing: 0.1em 0.4em;
+  }
+
+  .admin-user td:first-of-type{
+    width: 1.5em;
+  }
+
+  .admin-user td:nth-of-type(n + 2){
+    height: 1.5em;
+    padding-left: 0.5em;
+  }
+
+  .admin-user td:nth-last-of-type(-n + 3){
+    width: 1.5em;
+  }
+
+  .admin-user td:last-of-type{
+    fill: #7C7C93;
+  }
+
+  .admin-user img{
+    height: 1.5em;
+    float: left;
+    border-radius: 1em;
+  }
+
+  .admin-user svg{
+    height: 1.2em;
+    float: left;
+  }
+
+  .trash {
+    fill: var(--yellow);
+  }
+
+
+  .lock {
+    padding: 0 0.075em;
+    padding-bottom: 0.15em;
+    transition: 0.4s ease-in background;
+    background: transparent;
+    border-radius: 2em;
+  }
+  .lock.closed{
+    background: #7C7C93;
+  }
+  .lock.closed .st3{
+    fill: white;
+  }
+
+
+    body{
+      --yellow: #FFED00;
+      --font: 'Druk Wide';
+      background: black;
+      color: var(--yellow);
+      font-family: var(--font);
+      font-size: 4vw;
+    }
+
+    #loader,   #firebaseui-auth-container{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 100000;
+      background: rgba(255, 240, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    ul.firebaseui-idp-list{
+      padding: 0;
+    }
+    li.firebaseui-list-item{
+      display: block;
+    }
+    button.firebaseui-idp-button{
+      padding: 0;
+      border: none;
+      margin: auto;
+      display: block;
+      outline: none;
+      border-radius: 2em;
+
+    }
+    img.firebaseui-idp-icon{
+      height: 4em;
+      float: left;
+    }
+    span.firebaseui-idp-text-long{
+      line-height: 4em;
+      padding: 0 1em;
+    }
+    span.firebaseui-idp-text-short{
+      display:none
+    }
+
+    .firebaseui-container{
+      background: transparent;
+    }
+  </style>
+</html>

@@ -1,6 +1,6 @@
-import {SvgPlus} from "./SvgPlus.js"
-import {EditIcon} from "./Icons.js"
-import {DataSync} from "./DataSync.js"
+import {SvgPlus} from "../SvgPlus.js"
+import {EditIcon} from "../Icons.js"
+import {DataSync} from "../DataSync.js"
 let dataSync = new DataSync();
 
 class Display extends SvgPlus{

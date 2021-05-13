@@ -1,5 +1,5 @@
-import {SvgPlus} from "./SvgPlus.js"
-import {DataSync} from "./DataSync.js"
+import {SvgPlus} from "../SvgPlus.js"
+import {DataSync} from "../DataSync.js"
 import {Info} from "./Info.js"
 import {Works} from "./Works.js"
 import {Display} from "./Display.js"
