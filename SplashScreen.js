@@ -23,10 +23,7 @@ class SplashScreen extends SvgPlus{
 		this._icon_pos = new Vector(50, 50);
 		this._icon_offset = new Vector(0, 0);
 		this._icon_transform = new Vector(-50, -50);
-		this.styles = {
-			'font-size': '2em'
-		}
-		this.iconSize = `2.55em`
+
 
 		this.opacity = 1;
 		this.class = "splash-screen";
@@ -37,12 +34,14 @@ class SplashScreen extends SvgPlus{
 			right: 0,
 			bottom: 0,
 			'z-index': 100,
-			'pointer-events': 'none'
+			'pointer-events': 'none',
+			'font-size': '2em'
 		}
 
 		this.icon.styles = {
 			position: 'fixed',
 		}
+		this.iconSize = "2em"
 		this.showIcon = true;
 
   }
@@ -77,7 +76,7 @@ class SplashScreen extends SvgPlus{
 		await this.waveTransistion((t) => {
 			this.iconOffset = destination.mul(1 - t);
 			this.iconTransform = trans.mul(t);
-			this.iconSize = `${size*(1 + 0.5*t)}px`
+			this.iconSize = `calc(${size*(1 - t)}px + ${2*t}em)`
 			let a = pos.mul(t);
 			let b = new Vector(1,-1);
 			b = b.mul( -1 * 1.5 * Math.sin(t * Math.PI * 3) )
