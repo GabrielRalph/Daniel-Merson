@@ -1,0 +1,277 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dan Merson CMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../Assets/font/stylesheet.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+
+  </head>
+  <body>
+  </body>
+
+  <script type = "module">
+    import {User} from "./DataSync.js"
+    import {SvgPlus} from "./SvgPlus.js"
+    import {Cms} from "./Cms.js"
+
+    let user = new User("/CMS");
+
+    let cms = new Cms();
+    document.body.appendChild(cms)
+
+    user.addEventListener('user', (e) => {
+      cms.edit = user.admin
+    })
+
+    window.oncontextmenu = (e) => {
+      e.preventDefault()
+      let logout = new SvgPlus("DIV")
+      let over = true;
+      logout.onmouseover = () => {over = true}
+      logout.onmouseleave = () => {over = false}
+
+      logout.innerHTML = "Logout"
+      logout.styles = {
+        position: 'fixed',
+        top: (e.y-10)+'px',
+        left: (e.x-10)+'px',
+        cursor: 'pointer'
+      }
+      logout.onclick = () => {
+        user.signOut()
+      }
+
+      let next = () => {
+        setTimeout(async () => {
+          console.log(over);
+          if (!over) {
+            await logout.waveTransistion((t) => {
+              logout.styles = {opacity: t}
+            }, 500, false)
+            logout.remove()
+          }else{
+            next()
+          }
+        }, 1000)
+
+      }
+
+      document.body.appendChild(logout)
+      next();
+    }
+
+  </script>
+
+  <style>
+
+    .display {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .display video{
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      max-height: 100vh;
+      max-width: 100vw;
+
+    }
+    iframe{
+      width: 100%;
+      position: fixed;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    #showreal{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      min-height: 100vw;
+      min-width: 100vw;
+      transform: translate(-50%, -50%);
+    }
+
+    body{
+      --yellow: #FFED00;
+      --font: 'Druk Wide';
+      background: black;
+      color: var(--yellow);
+      font-family: var(--font);
+      margin: 5px 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    input{
+      padding: 10px;
+      font-family: var(--font);
+      color: var(--yellow);
+      background: transparent;
+      border: 3px solid var(--yellow);
+      border-radius: 50px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .form-panel h3{
+      margin: 20px 30px 5px 20px;
+
+    }
+    .form-panel input{
+      width: 40vw;
+    }
+
+    .form-panel h1{
+      margin: 0;
+    }
+
+    .form-panel{
+      padding: 50px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+    .form-panel > div{
+      margin: auto;
+      display: inline-block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    /* input:focus {
+      border: 5px solid var(--yellow);
+    } */
+
+    .v-list.works{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .v-list.links{
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+    }
+    .v-list.links a{
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    .link.edit a{
+      line-height: 30px;
+      height: 30px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .v-list h1{
+      margin: 0;
+    }
+
+    .v-list .list{
+      margin-left: 20px;
+    }
+    .v-list .header h1{
+      display: inline-block;
+    }
+
+
+    .work{
+      cursor: pointer;
+    }
+    .work.edit{
+      margin: 10px 0;
+    }
+
+    .work > div{
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    svg{
+      fill: var(--yellow);
+
+    }
+    .trash{
+      height: 20px;
+      margin: 5px;
+      fill: var(--yellow);
+    }
+
+    .work span{
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .work.edit span{
+      line-height: 30px;
+      height: 30px;
+    }
+    .arrow{
+      margin: 0 2px;
+    }
+
+    #loader,   #firebaseui-auth-container{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 100000;
+      background: rgba(255, 240, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    ul.firebaseui-idp-list{
+      padding: 0;
+    }
+    li.firebaseui-list-item{
+      display: block;
+    }
+    button.firebaseui-idp-button{
+      padding: 0;
+      border: none;
+      margin: auto;
+      display: block;
+      outline: none;
+      border-radius: 2em;
+
+    }
+    img.firebaseui-idp-icon{
+      height: 4em;
+      float: left;
+    }
+    span.firebaseui-idp-text-long{
+      line-height: 4em;
+      padding: 0 1em;
+    }
+    span.firebaseui-idp-text-short{
+      display:none
+    }
+
+    .firebaseui-container{
+      background: transparent;
+    }
+
+
+
+  </style>
+</html>
