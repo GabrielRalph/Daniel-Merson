@@ -50,6 +50,12 @@ class Cms extends SvgPlus{
     this.display.edit = val;
     this.works.edit = val;
     this.info.edit = val;
+    if (val){
+      this.class = "edit"
+    }else{
+      this.class = ""
+    }
+
   }
 
   async waitLoad(){

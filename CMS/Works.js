@@ -216,12 +216,10 @@ class Work extends SvgPlus{
   set edit(edit){
     this._edit = !!edit;
     if (this.edit) {
-      this.class = "work edit"
       if (!this.contains(this._edit_el)) {
         this.prepend(this._edit_el)
       }
     }else{
-      this.class = "work"
       if (this.contains(this._edit_el)) {
         this.removeChild(this._edit_el)
       }
@@ -269,9 +267,10 @@ class Works extends VList{
     this.add = new SvgPlus("H1");
     this.add.innerHTML = "+"
     this.add.styles = {
-      'margin-left': '20px',
+      'margin-right': '0.5em',
       cursor: "pointer",
-      float: 'right'
+      float: 'left',
+
     }
     this.add.onclick = () => {
       let form = this.createChild(FormPanel)

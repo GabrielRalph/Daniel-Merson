@@ -87,12 +87,10 @@ class Link extends SvgPlus{
 
   set edit(edit){
     if (!!edit){
-      this.class = "link edit"
       if (!this.contains(this._trash)){
         this.appendChild(this._trash)
       }
     }else{
-      this.class = "link"
       this._trash.remove()
     }
   }
@@ -106,7 +104,7 @@ class Info extends VList{
     })
     this.add = new SvgPlus("H1");
     this.add.styles = {
-      'margin-left': '20px',
+      'margin-left': '0.5em',
       cursor: "pointer"
     }
     this.add.onclick = () => {
