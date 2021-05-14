@@ -104,6 +104,20 @@ class Display extends SvgPlus{
     this._sreal.remove();
     this.appendChild(this._works)
     this._works.innerHTML = work.video
+    let iframe = this._works.getElementsByTagName("iframe")[0];
+    if (iframe){
+      let resize = () => {
+        if (iframe){
+          let bb = iframe.getBoundingClientRect();
+          let h = iframe.getAttribute("height")
+          let w = iframe.getAttribute("width")
+
+          iframe.style.setProperty("height", `${bb.width * h / w}px`);
+        }
+      }
+      window.onresize = resize;
+      resize();
+    }
     this._namebox.innerHTML = work.client
   }
 
