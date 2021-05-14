@@ -64,9 +64,32 @@ class SplashScreen extends SvgPlus{
 
   }
 
-	onclick(){
-
+	waitFor(logoParentId, contentId){
+		window.onload = async () => {
+			try{
+				if (typeof contentId === 'string'){
+					let content = document.getElementById(contentId);
+					if (content instanceof Element && content.waitLoad instanceof Function) {
+						await content.waitLoad()
+					}
+				}else if (contentId instanceof Function) {
+					let res = contentId();
+					if (res instanceof Promise) {
+						await res
+					}
+				}
+				let element = document.getElementById(logoParentId);
+				if (element instanceof Element) {
+					element.innerHTML = ""
+					this.moveToElement(element);
+				}
+			}catch(e){
+				console.log(e);
+				return
+			}
+		}
 	}
+
 
 	updateIconStyle(){
 		// console.log(`calc(${this.iconPos.x}% + ${this.iconOffset.x}px)`);

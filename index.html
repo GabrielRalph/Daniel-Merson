@@ -4,20 +4,14 @@
     <title>Daniel Merson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type = "module">
-      import {SplashScreen} from "./SplashScreen.js"
+      import {SplashScreen} from "../src/SplashScreen.js"
 
       let splash = new SplashScreen();
       document.body.appendChild(splash);
-
-      window.onload = async () => {
-        let page = document.getElementById("page");
-        await page.waitLoad()
-        let element = document.getElementById("logo");
-        element.innerHTML = ""
-        splash.moveToElement(element);
-      }
+      splash.waitFor("logo", "portfolio")
     </script>
     <link href="../Assets/font/stylesheet.css" rel="stylesheet">
+    <link href="../Assets/mainThemes.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
   </head>
@@ -26,134 +20,14 @@
   </body>
 
   <script type = "module">
-    import {Cms} from "./CMS/Cms.js"
+    import {Portfolio} from "./src/portfolio/Portfolio.js"
 
-    let cms = new Cms();
-    cms.edit = false;
-    document.body.appendChild(cms)
+    let portfolio = new Portfolio();
+    portfolio.edit = false;
+    document.body.appendChild(portfolio)
     window.onkeydown = (e) => {
-      let earl = document.querySelector("#page > div.v-list.works > div.list > div:nth-child(1) > span");
-      if (e.key == "a") cms.info.open = true;
-      if (e.key == "s") cms.toggleWorks();
-      if (e.key == "d") earl.click();
+      if (e.key == "e") portfolio.info.open = !portfolio.info.open;
+      if (e.key == "w") portfolio.toggleWorks();
     }
   </script>
-
-  <style>
-    body{
-      font-size: min(3vw, 20px);
-      --yellow: #ffeb00;
-      --font: 'Druk Wide';
-      background: black;
-      color: var(--yellow);
-      font-family: var(--font);
-      margin: 5px 15px;
-      position: relative;
-      overflow: hidden;
-      user-select: none;
-    }
-
-  /* Display */
-
-    .display {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .display video{
-      position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      max-height: 100vh;
-      max-width: 100vw;
-    }
-
-    iframe{
-      max-height: calc(100% - 20%);
-      width: calc(100% - 30px);
-      position: fixed;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-
-    #showreal{
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-      max-height: 100vmax;
-      min-height: 100vh;
-      min-width: 100vw;
-      transform: translate(-50%, -50%);
-    }
-
-  /* v-list */
-
-    .v-list{
-      pointer-events: none;
-      display: inline-block;
-    }
-
-    .v-lis .header{
-      pointer-events: none;
-    }
-
-    .v-list .header h1{
-      cursor: pointer;
-      pointer-events: all;
-      display: inline-block;
-      margin: 0;
-    }
-
-    .list > div{
-      font-size: 1.3em;
-      pointer-events: all;
-
-    }
-
-  /* works */
-
-    .works{
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .work.edit{
-      margin: 10px 0;
-    }
-
-    .work > div{
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    .work span{
-      display: inline-block;
-      vertical-align: top;
-      cursor: pointer;
-    }
-
-  /* links */
-
-    .links{
-      position: absolute;
-      top: 0;
-      right: 0;
-      text-align: right;
-    }
-
-    .links a{
-      color: var(--yellow);
-      text-decoration: none;
-    }
-
-    svg {
-      fill: var(--yellow);
-    }
-
-  </style>
 </html>

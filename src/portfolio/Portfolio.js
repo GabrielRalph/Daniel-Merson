@@ -7,11 +7,11 @@ import {Display} from "./Display.js"
 let dataSync = new DataSync();
 
 
-class Cms extends SvgPlus{
+class Portfolio extends SvgPlus{
   constructor(){
     super("DIV")
 
-    this.id = "page"
+    this.id = "portfolio"
 
     this.display = this.createChild(Display)
     this.works = this.createChild(Works)
@@ -70,4 +70,4 @@ class Cms extends SvgPlus{
   }
 }
 
-export {Cms}
+export {Portfolio}

@@ -14,7 +14,7 @@ class FormPanel extends SvgPlus{
 
     el.createChild("H3").innerHTML = "Client Name"
     this.name = el.createChild("input");
-    el.createChild("H3").innerHTML = "Vimeo Iframe"
+    el.createChild("H3").innerHTML = "Embed Iframe"
     this.link_el = el.createChild("input");
     let btns = el.createChild("DIV");
     this.add = btns.createChild("H1", {
@@ -61,10 +61,7 @@ class Order extends SvgPlus{
   constructor(){
     super("DIV");
     this._order_end = 5;
-    this.styles = {
-      'display': 'inline-block'
-
-    }
+    this.class = "order-icon"
 
     let up = this.createChild(Arrow);
     up.styles = {
@@ -145,6 +142,7 @@ class Work extends SvgPlus{
     this.class = "work"
 
     this._edit_el = new SvgPlus("DIV")
+    this._edit_el.class = "work-edit-icons"
     this._order_el = this._edit_el.createChild(Order);
     let trash = this._edit_el.createChild(TrashIcon);
     trash.onclick = () => {
