@@ -10,7 +10,7 @@ class Splash extends SvgPlus{
     if (await this.waitFor(id)) {
       await this.waveTransistion((t) => {
         this.styles = {opacity: t}
-      }, 400, false);
+      }, 200, false);
       this.styles = {display: "none"}
     }
   }
