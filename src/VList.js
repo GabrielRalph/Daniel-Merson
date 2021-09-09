@@ -1,5 +1,5 @@
 import {SvgPlus} from './SvgPlus.js'
-
+let TransitionSpeed = 150;
 class VList extends SvgPlus{
   constructor(name, list, ItemClass, state = true){
     super('DIV');
@@ -75,7 +75,7 @@ class VList extends SvgPlus{
       //   this._listElement.styles = {
       //     height: `${height + dh*t}`
       //   }
-      // }, 500, true)
+      // }, TransitionSpeed, true)
       // this._listElement.styles = {
       //   height: 'auto'
       // }
@@ -123,7 +123,7 @@ class VList extends SvgPlus{
     this._moving = true;
     await this.waveTransistion((t) => {
       this.height = t*height
-    }, 500, true)
+    }, TransitionSpeed, true)
     this.height = 'auto'
     this._moving = false;
   }
@@ -133,7 +133,7 @@ class VList extends SvgPlus{
     let height = this.height;
     await this.waveTransistion((t) => {
       this.height = t*height
-    }, 500, false)
+    }, TransitionSpeed, false)
     this._moving = false;
   }
 

@@ -26,6 +26,7 @@ class SplashScreen extends SvgPlus{
 		this._phi = new Phi()
 		this._phi.styles = {
 			position: 'fixed',
+			display: "none",
 			left: '50%',
 			bottom: '30px',
 			transform: 'translate(-50%, 0)',
