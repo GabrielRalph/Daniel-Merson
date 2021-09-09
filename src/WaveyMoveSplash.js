@@ -23,49 +23,49 @@ class SplashScreen extends SvgPlus{
   constructor(){
     super('DIV');
 		this._icon = new Icon(logo);
-		this._phi = new Phi()
-		this._phi.styles = {
-			position: 'fixed',
-			display: "none",
-			left: '50%',
-			bottom: '30px',
-			transform: 'translate(-50%, 0)',
-			'pointer-events': 'all'
-		}
-		this._phi.onclick = () => {
-			let link = new SvgPlus("A");
-			link.href = "https://www.galetora.com"
-			link.click()
-		}
-		this.appendChild(this._phi)
+		// this._phi = new Phi()
+		// this._phi.styles = {
+		// 	position: 'fixed',
+		// 	display: "none",
+		// 	left: '50%',
+		// 	bottom: '30px',
+		// 	transform: 'translate(-50%, 0)',
+		// 	'pointer-events': 'all'
+		// }
+		// this._phi.onclick = () => {
+		// 	let link = new SvgPlus("A");
+		// 	link.href = "https://www.galetora.com"
+		// 	link.click()
+		// }
+		// this.appendChild(this._phi)
 
-		this._icon_pos = new Vector(50, 50);
-		this._icon_offset = new Vector(0, 0);
-		this._icon_transform = new Vector(-50, -50);
+		// this._icon_pos = new Vector(50, 50);
+		// this._icon_offset = new Vector(0, 0);
+		// this._icon_transform = new Vector(-50, -50);
 
 
-		this.opacity = 1;
-		this.class = "splash-screen";
-		this.styles = {
-			position: 'fixed',
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 0,
-			'z-index': 100,
-			'pointer-events': 'none',
-			'font-size': '2em'
-		}
-
-		this.icon.styles = {
-			position: 'fixed',
-		}
-		this.iconSize = "2em"
-		this.showIcon = true;
+		// this.opacity = 1;
+		// this.class = "splash-screen";
+		// this.styles = {
+		// 	position: 'fixed',
+		// 	top: 0,
+		// 	left: 0,
+		// 	right: 0,
+		// 	bottom: 0,
+		// 	'z-index': 100,
+		// 	'pointer-events': 'none',
+		// 	'font-size': '2em'
+		// }
+		//
+		// this.icon.styles = {
+		// 	position: 'fixed',
+		// }
+		// this.iconSize = "2em"
+		// this.showIcon = true;
 
   }
 
-	waitFor(logoParentId, contentId){
+	waitFor(contentId){
 		window.onload = async () => {
 			try{
 				if (typeof contentId === 'string'){
@@ -79,11 +79,9 @@ class SplashScreen extends SvgPlus{
 						await res
 					}
 				}
-				let element = document.getElementById(logoParentId);
-				if (element instanceof Element) {
-					element.innerHTML = ""
-					this.moveToElement(element);
-				}
+				await this.waveTransistion((t) => {
+					this.styles = {opacity: t}
+				}, 200, false);
 			}catch(e){
 				console.log(e);
 				return

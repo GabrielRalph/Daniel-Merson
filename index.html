@@ -4,11 +4,11 @@
     <title>Daniel Merson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type = "module">
-      import {SplashScreen} from "../src/SplashScreen.js"
-
-      let splash = new SplashScreen();
-      document.body.appendChild(splash);
-      splash.waitFor("logo", "portfolio")
+      import {Splash} from "../src/splash.js"
+      let splash = new Splash("portfolio")
+      // let splash = new SplashScreen();
+      // document.body.appendChild(splash);
+      // splash.waitFor("logo", "portfolio")
     </script>
     <link href="../Assets/font/stylesheet.css" rel="stylesheet">
     <link href="../Assets/mainThemes.css" rel="stylesheet">
@@ -17,6 +17,9 @@
   </head>
 
   <body>
+    <div id = "splash">
+      <h1>Daniel Merson</h1>
+    </div>
   </body>
 
   <script type = "module">

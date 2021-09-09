@@ -4,20 +4,10 @@
     <title>Daniel Merson CMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type = "module">
-      import {SplashScreen} from "../src/SplashScreen.js"
+      import {Splash} from "../src/splash.js"
 
-      let splash = new SplashScreen();
-      document.body.appendChild(splash);
+      let splash = new Splash("portfolio");
 
-      splash.waitFor("logo", () => {return new Promise((resolve, reject) => {
-        try{
-          let user = document.getElementById("portfolio").user
-          user.addEventListener('user', (e) => {
-            resolve(true)
-          })
-        }catch(e){
-        }
-      })})
     </script>
     <link href="../Assets/font/stylesheet.css" rel="stylesheet">
     <link href="../Assets/mainThemes.css" rel="stylesheet">
@@ -30,6 +20,9 @@
   </head>
 
   <body>
+    <div id = "splash">
+      <h1>Daniel Merson</h1>
+    </div>
   </body>
 
   <script type = "module">
@@ -95,7 +88,7 @@
       border-radius: 50px;
       outline: none;
       font-size: max(16px, 1em);
-      width: 40vw;
+      width: 60vw;
     }
 
     .form-panel h3{
@@ -122,8 +115,8 @@
     }
 
     .trash{
-      height: 20px;
-      margin: 5px;
+      height: 1em;
+      margin-left: 1em;
     }
 
     .arrow{

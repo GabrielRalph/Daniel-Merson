@@ -60,7 +60,11 @@ class FormPanel extends SvgPlus{
 class Link extends SvgPlus{
   constructor(link){
     super("DIV");
-    this._link_el = this.createChild("A");
+    if (link.href) {
+      this._link_el = this.createChild("A");
+    }else{
+      this._link_el = this.createChild("span");
+    }
     this._trash = new TrashIcon();
     this._trash.onclick = () => {
       this.remove()
@@ -74,15 +78,20 @@ class Link extends SvgPlus{
   }
 
   set link(link){
-    this._link_el.href = link.href
-    this._link_el.innerHTML = link.title
+    if (link.href){
+      this._link_el.href = link.href;
+    }
+    this._link_el.innerHTML = link.title;
   }
 
   get link(){
-    return {
-      href: this._link_el.href,
+    let link = {
       title: this._link_el.innerHTML
     }
+    if (this._link_el.href) {
+      link["href"] = this._link_el.href;
+    }
+    return link;
   }
 
   set edit(edit){
@@ -100,6 +109,7 @@ class Info extends VList{
   constructor(){
     super("Info", null, Link, false);
     dataSync.on("info", (e) => {
+      console.log(e);
       this.list = dataSync.asList(e)
     })
     this.add = new SvgPlus("H1");
@@ -107,13 +117,17 @@ class Info extends VList{
       'margin-left': '0.5em',
       cursor: "pointer"
     }
+
+
     this.add.onclick = () => {
       let form = new FormPanel()
       this.open = true;
       document.body.appendChild(form)
       form.onadd = (link) => {
+        console.log(link);
         let links = this.links;
         links.push(link)
+        console.log(links);
         this.list = links;
         this.updateInfo();
       }

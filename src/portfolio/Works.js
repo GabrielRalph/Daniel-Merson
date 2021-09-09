@@ -255,7 +255,7 @@ class Work extends SvgPlus{
 
 class Works extends VList{
   constructor(){
-    super("Dan Merson", null, Work, false);
+    super("Daniel Merson", null, Work, false);
     dataSync.on("works", (e) => {
       this.works = e;
     })

@@ -134,6 +134,7 @@ class DataSync{
   }
 
   async set(ref, value){
+    console.log(value);
     return new Promise((resolve, reject) => {
       try{
         this.ref(ref).set(value).then((e) => {
